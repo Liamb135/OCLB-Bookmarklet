@@ -1,0 +1,33 @@
+javascript:
+function giveLlamas() {
+  let elements = document.querySelectorAll('.oclb.oclb-give');
+  let index = 0;
+
+  let clickInterval = setInterval(() => {
+    if (index < elements.length) {
+      let spamFilter = document.querySelector('.oclb.oclb-spam');
+      if (spamFilter) {
+        clearInterval(clickInterval);
+        return;
+      }
+      
+      elements[index].click();
+      index++;
+    } else {
+      clearInterval(clickInterval);
+    }
+  }, 1000);
+}
+
+function scrollAndClick() {
+  giveLlamas();
+  let spamFilter = document.querySelector('.oclb.oclb-spam');
+  if (spamFilter) {
+	alert("Badges have been given too quickly, and have tripped a spam filter. Slow down a bit. You won't be able to give more badges for a few minutes. The script has stopped.🧙✨🦙");
+	return;
+  }
+  window.scrollBy(0, window.innerHeight * 0.25);
+  setTimeout(scrollAndClick, 5000);
+}
+
+scrollAndClick();
